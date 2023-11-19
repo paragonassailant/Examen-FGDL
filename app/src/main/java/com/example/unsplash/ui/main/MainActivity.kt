@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.unsplash.MySuggestionProvider
+import com.example.unsplash.R
 import com.example.unsplash.data.entities.UImages
 import com.example.unsplash.databinding.ActivityMainBinding
 import com.example.unsplash.sys.util.Constants.Companion.ALT_DESCRIPTION
@@ -45,7 +46,7 @@ class MainActivity : AppCompatActivity(), IAUImage {
     private var pageSize = 30
     private var isLoading: Boolean = false
     private var isLastPage: Boolean = false
-    private lateinit var search:String
+    private lateinit var search: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,7 +82,8 @@ class MainActivity : AppCompatActivity(), IAUImage {
                 val firstVisibleItemPos = manager.findFirstVisibleItemPosition()
                 if (!isLoading && !isLastPage) {
                     if (visibleItem + firstVisibleItemPos >= totalItem && firstVisibleItemPos >= 0
-                        && totalItem >= pageSize) {
+                        && totalItem >= pageSize
+                    ) {
                         page++
                         viewModel.getImages(search, page)
                     }
@@ -122,9 +124,9 @@ class MainActivity : AppCompatActivity(), IAUImage {
                 true
             }
         }
-        viewModel.onError.observe(this) {
-            Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
-            Log.d("ERROR", it.message)
+        viewModel.onError.observe(this) { error ->
+            Toast.makeText(this, getString(R.string.empty_list), Toast.LENGTH_SHORT).show()
+            Log.d("ERROR", error.errorCode.toString())
         }
     }
 
