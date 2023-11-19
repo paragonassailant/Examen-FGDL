@@ -17,9 +17,9 @@ import javax.inject.Inject
 
 class ImageRepository @Inject constructor(val webDS: ImageWebDS, @ApplicationContext private var context: Context, private val dao: ImagesDao) {
 
-    fun requestImages(query:String, clientId:String,per_page:Int, observer: Observer<List<UImages>>, error: Observer<ErrorObserver>){
+    fun requestImages(query:String, clientId:String,page:Int,per_page:Int, observer: Observer<List<UImages>>, error: Observer<ErrorObserver>){
         if (Connection.connection(context)){
-            webDS.requestImages(query, clientId,per_page, buildRequest(observer,error), error)
+            webDS.requestImages(query, clientId,page,per_page, buildRequest(observer,error), error)
             CoroutineScope(Dispatchers.IO).launch {
                 dao.truncate()
             }

@@ -16,8 +16,8 @@ import javax.inject.Inject
 
 class ImageWebDS @Inject constructor(private val webServices: WebServices) {
 
-    fun requestImages(query:String, clientId:String,per_page:Int, observer: Observer<List<UImages>>, error: Observer<ErrorObserver>){
-        webServices.searchPhotos(query,clientId,per_page).enqueue(object : Callback<OnResponseImage> {
+    fun requestImages(query:String, clientId:String,page:Int,per_page:Int, observer: Observer<List<UImages>>, error: Observer<ErrorObserver>){
+        webServices.searchPhotos(query,clientId,page,per_page).enqueue(object : Callback<OnResponseImage> {
             override fun onResponse(call: Call<OnResponseImage>, response: Response<OnResponseImage>) {
                 CoroutineScope(Dispatchers.IO).launch {
                     when(response.code()){

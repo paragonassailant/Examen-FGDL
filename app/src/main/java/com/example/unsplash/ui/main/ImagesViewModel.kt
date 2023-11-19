@@ -5,6 +5,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.example.unsplash.data.entities.UImages
 import com.example.unsplash.domain.ImageRepository
+import com.example.unsplash.sys.util.Constants.Companion.API_KEY
+import com.example.unsplash.sys.util.Constants.Companion.PER_PAGE
 import com.example.unsplash.sys.util.ErrorObserver
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -19,8 +21,8 @@ class ImagesViewModel @Inject constructor(private val repository: ImageRepositor
     val onSuccess = MutableLiveData<List<UImages>>()
     val onError by lazy { MutableLiveData<ErrorObserver>() }
 
-    fun getImages(query:String, clientId:String,per_page:Int){
-        repository.requestImages(query,clientId,per_page, buildResponse1(),buildError())
+    fun getImages(query:String,page:Int){
+        repository.requestImages(query,API_KEY,page, PER_PAGE, buildResponse1(),buildError())
     }
 
     private fun buildResponse1(): Observer<List<UImages>> {
