@@ -20,7 +20,7 @@ data class UImages(
     @SerializedName("color") val color: String,
     @SerializedName("blur_hash") val blur_hash: String?,
     @SerializedName("description") val description: String?,
-    @SerializedName("alt_description") val alt_description: String,
+    @SerializedName("alt_description") val alt_description: String?,
     @SerializedName("likes") val likes: Int,
 
 

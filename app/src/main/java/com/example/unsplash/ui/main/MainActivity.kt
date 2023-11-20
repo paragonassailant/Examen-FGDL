@@ -1,5 +1,6 @@
 package com.example.unsplash.ui.main
 
+import android.annotation.SuppressLint
 import android.app.SearchManager
 import android.content.Intent
 import android.os.Bundle
@@ -125,7 +126,8 @@ class MainActivity : AppCompatActivity(), IAUImage {
             }
         }
         viewModel.onError.observe(this) { error ->
-            Toast.makeText(this, getString(R.string.empty_list), Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, error.message, Toast.LENGTH_SHORT).show()
+         //   Toast.makeText(this, getString(R.string.empty_list), Toast.LENGTH_SHORT).show()
             Log.d("ERROR", error.errorCode.toString())
         }
     }
@@ -167,5 +169,9 @@ class MainActivity : AppCompatActivity(), IAUImage {
         }
     }
 
+    @SuppressLint("MissingSuperCall")
+    override fun onBackPressed() {
+        onBackPressedDispatcher.onBackPressed()
+    }
 
 }
