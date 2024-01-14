@@ -73,7 +73,7 @@ object NetworkModule {
             OkHttpClient.Builder()
                 .addInterceptor(interceptor)
                 .sslSocketFactory(sslContext.socketFactory, x509TrustManager)
-                .hostnameVerifier { hostname: String?, session: SSLSession? -> true }
+                .hostnameVerifier { _: String?, _: SSLSession? -> true }
                 .connectTimeout(secondsToWait.toLong(), TimeUnit.SECONDS)
                 .writeTimeout(secondsToWait.toLong(), TimeUnit.SECONDS)
                 .readTimeout(secondsToWait.toLong(), TimeUnit.SECONDS).build()

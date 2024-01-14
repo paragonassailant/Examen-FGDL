@@ -92,11 +92,12 @@ class DetailItemActivity : AppCompatActivity() {
     }
 
     @SuppressLint("SimpleDateFormat")
-    private fun updatedAt(date: String, formato: String): String {
+    private fun updatedAt(date: String, format: String): String {
         val parser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
-        val formatter = SimpleDateFormat(formato)
+        val formatter = SimpleDateFormat(format)
         val fecha = parser.parse(date)
         return formatter.format(fecha!!)
+
     }
 
 
