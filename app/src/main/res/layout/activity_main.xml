@@ -30,13 +30,12 @@
                 android:layout_margin="16dp"
                 android:layout_weight="1"
                 android:background="@drawable/search_view_bg"
+                android:saveEnabled="true"
                 app:iconifiedByDefault="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:queryHint="@string/search"
-                android:saveEnabled="true"
-                />
+                app:queryHint="@string/search" />
 
 
         </LinearLayout>
@@ -44,6 +43,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_margin="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/llsv">
 
@@ -51,9 +51,8 @@
                 android:id="@+id/rvImages"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:listitem="@layout/item_image"
                 android:layout_gravity="center"
-                android:layout_marginStart="8dp"/>
+                tools:listitem="@layout/item_image" />
 
         </LinearLayout>
 

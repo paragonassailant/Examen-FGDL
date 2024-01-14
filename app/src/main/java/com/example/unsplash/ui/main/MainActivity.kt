@@ -9,14 +9,12 @@ import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.unsplash.MySuggestionProvider
-import com.example.unsplash.R
 import com.example.unsplash.data.entities.UImages
 import com.example.unsplash.databinding.ActivityMainBinding
 import com.example.unsplash.sys.util.Constants.Companion.ALT_DESCRIPTION
@@ -126,8 +124,6 @@ class MainActivity : AppCompatActivity(), IAUImage {
             }
         }
         viewModel.onError.observe(this) { error ->
-            Toast.makeText(this, error.message, Toast.LENGTH_SHORT).show()
-         //   Toast.makeText(this, getString(R.string.empty_list), Toast.LENGTH_SHORT).show()
             Log.d("ERROR", error.errorCode.toString())
         }
     }
@@ -169,6 +165,7 @@ class MainActivity : AppCompatActivity(), IAUImage {
         }
     }
 
+    @Deprecated("Deprecated in Java", ReplaceWith("onBackPressedDispatcher.onBackPressed()"))
     @SuppressLint("MissingSuperCall")
     override fun onBackPressed() {
         onBackPressedDispatcher.onBackPressed()
