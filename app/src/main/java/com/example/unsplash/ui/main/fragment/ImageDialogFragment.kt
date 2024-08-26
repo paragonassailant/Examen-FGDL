@@ -28,7 +28,7 @@ class ImageDialogFragment : DialogFragment() {
         val dialogView = inflater.inflate(R.layout.fragment_dialog_image, null)
         val image = dialogView.findViewById<ImageView>(R.id.imageView)
         imageUrl.let {
-            Picasso.with(requireContext())
+            Picasso.get()
                 .load(it)
                 .fit()
                 .centerCrop()

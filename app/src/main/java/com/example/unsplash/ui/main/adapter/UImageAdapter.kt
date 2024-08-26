@@ -36,13 +36,13 @@ class UImageAdapter(private var uImages: List<UImages>, private var context: Con
 
 
         if (item.urls != null) {
-            Picasso.with(context)
+            Picasso.get()
                 .load(item.urls!!.thumb)
                 .fit()
                 .centerCrop()
                 .into(holder.binding.ivThumb)
         } else {
-            Picasso.with(context)
+            Picasso.get()
                 .load(R.drawable.ic_launcher_background)
                 .fit()
                 .centerCrop()

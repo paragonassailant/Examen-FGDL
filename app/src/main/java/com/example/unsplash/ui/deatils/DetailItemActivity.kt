@@ -75,7 +75,7 @@ class DetailItemActivity : AppCompatActivity() {
         binding.tvLikes.text = likes.toString()
 
 
-        Picasso.with(this)
+        Picasso.get()
             .load(urlFull)
             .fit()
             .centerCrop()
