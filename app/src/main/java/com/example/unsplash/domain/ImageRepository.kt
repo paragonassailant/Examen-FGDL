@@ -41,10 +41,25 @@ class ImageRepository @Inject constructor(val webDS: ImageWebDS, @ApplicationCon
         }
     }
 
+/*    private fun getLocalData(observer: Observer<List<UImages>>) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val images = dao.getImagesWithUrls()
+            observer.onChanged(images)
+        }
+    }*/
+
     private fun getLocalData(observer: Observer<List<UImages>>) {
         CoroutineScope(Dispatchers.IO).launch {
-            val images = dao.getImagesAndUrls()
+            val imagesWithUrls = dao.getImagesWithUrls()
+            // Convert the list of UImageWithUrls to UImages
+            val images = imagesWithUrls.map { uImageWithUrls ->
+                uImageWithUrls.image.apply {
+                    this.urls = uImageWithUrls.urls  // Assign URLs to each image
+                }
+            }
+            // Pass converted list to observer
             observer.onChanged(images)
         }
     }
+
 }

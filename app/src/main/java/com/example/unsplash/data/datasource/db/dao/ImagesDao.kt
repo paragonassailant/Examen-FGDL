@@ -1,3 +1,4 @@
+
 package com.example.unsplash.data.datasource.db.dao
 
 import androidx.room.Dao
@@ -6,45 +7,31 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import com.example.unsplash.data.entities.IUrls
+import com.example.unsplash.data.entities.UImageWithUrls
 import com.example.unsplash.data.entities.UImages
 
 @Dao
-abstract class ImagesDao {
-
+interface ImagesDao {
 
     @Transaction
-    @Query("SELECT * FROM UImages GROUP BY id")
-    abstract fun getImage(): List<UImages>
+    @Query("SELECT * FROM UImages")
+    fun getImagesWithUrls(): List<UImageWithUrls>
 
-    fun getImagesAndUrls(): List<UImages> {
-        val images = getImage()
-        for (u: UImages in images) {
-            u.urls = getUrlsById(u.idRoom)
-        }
-        return images
-    }
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(data: IUrls)
 
-    @Query("SELECT DISTINCT *  FROM Urls WHERE id=:id")
-    abstract fun getUrlsById(id: Int): IUrls
-
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(data: UImages)
 
     @Query("DELETE FROM UImages")
-    abstract fun truncate()
+    fun truncate()
 
-    @Query("DELETE FROM urls")
-    abstract fun truncateUrl()
+    @Query("DELETE FROM Urls")
+    fun truncateUrl()
 
-
+    @Transaction
     fun insertAllData(uImages: UImages) {
         insert(uImages)
         insert(uImages.urls!!)
     }
-
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun insert(data: IUrls)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun insert(data: UImages)
-
 }
