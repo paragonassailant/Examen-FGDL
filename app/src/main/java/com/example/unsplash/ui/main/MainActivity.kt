@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity(), IAUImage {
     private var pageSize = 30
     private var isLoading: Boolean = false
     private var isLastPage: Boolean = false
-    private lateinit var search: String
+    private var search: String = "cats"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity(), IAUImage {
         setContentView(view)
 
         viewModel = ViewModelProvider(this)[ImagesViewModel::class.java]
-        viewModel.getImages("cats", page)
+        viewModel.getImages(search, page)
 
         setObservers()
         initConfig()
