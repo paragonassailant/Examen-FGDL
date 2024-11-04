@@ -103,7 +103,6 @@ class MainActivity : AppCompatActivity(), IAUImage {
                 return true
 
             }
-
             override fun onQueryTextChange(newText: String): Boolean {
                 return false
             }
