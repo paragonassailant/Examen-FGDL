@@ -4,7 +4,7 @@ class Constants {
     companion object {
         const val BASE_URL = "http://api.unsplash.com"
         const val API_KEY = "FBAUo8xHBYK2HKx_9-jof6IkViyjXGELUvDazYd7Eyw"
-        const val PER_PAGE = 30
+        const val PER_PAGE = 5
 
         //  const val SECRET_KEY = "Qlg93bSFGrBHVPrabOh5YrOicpeGy6yxi24Vd4WscHQ"
         const val RETROFIT_FAILURE = 404

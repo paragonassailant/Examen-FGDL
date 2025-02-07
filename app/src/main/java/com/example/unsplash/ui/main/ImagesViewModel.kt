@@ -3,6 +3,9 @@ package com.example.unsplash.ui.main
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.example.unsplash.data.entities.UImages
 import com.example.unsplash.domain.ImageRepository
 import com.example.unsplash.sys.util.Constants.Companion.API_KEY
@@ -11,6 +14,7 @@ import com.example.unsplash.sys.util.ErrorObserver
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -39,5 +43,8 @@ class ImagesViewModel @Inject constructor(private val repository: ImageRepositor
         return Observer {
             onError.postValue(it)
         }
+    }
+    fun getImagesPaging(query: String): Flow<PagingData<UImages>> {
+        return repository.getImagesPaging(query, API_KEY).cachedIn(viewModelScope)
     }
 }

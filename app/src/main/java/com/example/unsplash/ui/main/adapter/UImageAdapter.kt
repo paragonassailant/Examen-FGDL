@@ -1,9 +1,10 @@
 package com.example.unsplash.ui.main.adapter
 
-import android.content.Context
+
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.unsplash.R
 import com.example.unsplash.data.entities.UImages
@@ -11,50 +12,53 @@ import com.example.unsplash.databinding.ItemImageBinding
 import com.example.unsplash.ui.main.interfaces.IAUImage
 import com.squareup.picasso.Picasso
 
-class UImageAdapter(private var uImages: List<UImages>, private var context: Context, private var listener:IAUImage) :
-    RecyclerView.Adapter<UImageAdapter.ViewHolder>() {
+class UImageAdapter(private val listener: IAUImage) :
+    PagingDataAdapter<UImages, UImageAdapter.ViewHolder>(DIFF_CALLBACK) {
 
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<UImages>() {
+            override fun areItemsTheSame(oldItem: UImages, newItem: UImages): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: UImages, newItem: UImages): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        context = parent.context
-        val view = LayoutInflater.from(context).inflate(R.layout.item_image, parent, false)
-        return ViewHolder(view)
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = ItemImageBinding.inflate(inflater, parent, false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = uImages[position]
-        holder.binding.tvId.text = item.id
+        val item = getItem(position)
 
-        holder.binding.ivThumb.setOnClickListener {
-            listener.viewImage(item)
+        item?.let {
+            holder.binding.tvId.text = it.id
+
+            holder.binding.ivThumb.setOnClickListener {
+                listener.viewImage(item)
+            }
+
+            holder.binding.cvUnsplash.setOnClickListener {
+                listener.details(item)
+            }
+
+            if (item.urls != null) {
+                Picasso.get()
+                    .load(item.urls!!.thumb)
+                    .into(holder.binding.ivThumb)
+            } else {
+                Picasso.get()
+                    .load(R.drawable.ic_launcher_background)
+                    .into(holder.binding.ivThumb)
+            }
         }
-
-        holder.binding.cvUnsplash.setOnClickListener {
-            listener.details(item)
-        }
-
-
-
-        if (item.urls != null) {
-            Picasso.get()
-                .load(item.urls!!.thumb)
-                .fit()
-                .centerCrop()
-                .into(holder.binding.ivThumb)
-        } else {
-            Picasso.get()
-                .load(R.drawable.ic_launcher_background)
-                .fit()
-                .centerCrop()
-                .into(holder.binding.ivThumb)
-        }
-
     }
 
-    override fun getItemCount() = uImages.size
-
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val binding = ItemImageBinding.bind(view)
-    }
-
+    inner class ViewHolder(val binding: ItemImageBinding) :
+        RecyclerView.ViewHolder(binding.root)
 }

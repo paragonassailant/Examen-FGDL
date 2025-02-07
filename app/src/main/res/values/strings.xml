@@ -16,4 +16,5 @@
     <string name="likes">Number of likes:</string>
     <string name="image_details">Image Details</string>
     <string name="empty_list">No hay resultados para mostrar</string>
+    <string name="allowed_digits">qwertyuiopasdfghjklzxcvbnmñ 1234567890 QWERTYUIOPASDFGHJKLZXCVBNMÑ</string>
 </resources>

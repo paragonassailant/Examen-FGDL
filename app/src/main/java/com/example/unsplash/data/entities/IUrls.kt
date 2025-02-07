@@ -8,6 +8,6 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "Urls")
 data class IUrls(
     @PrimaryKey(autoGenerate = true) val id: Int,
-    @SerializedName("full") val full: String,
-    @SerializedName("thumb") val thumb: String
+    @SerializedName("full") val full: String?,
+    @SerializedName("thumb") val thumb: String?
 )

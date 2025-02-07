@@ -45,4 +45,17 @@ class ImageWebDS @Inject constructor(private val webServices: WebServices) {
         })
     }
 
+    fun getImages(query: String, clientId: String, page: Int, perPage: Int): List<UImages> {
+        return try {
+            val response = webServices.searchPhotos(query, clientId, page, perPage).execute()
+            if (response.isSuccessful && response.body()?.result != null) {
+                response.body()!!.result
+            } else {
+                emptyList()
+            }
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
+
 }
