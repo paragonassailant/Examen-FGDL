@@ -1,6 +1,6 @@
-package com.example.unsplash.ui.main.pagination
+package com.example.unsplash.data.datasource.pagination
 
-import com.example.unsplash.data.datasource.web.api.WebServices
+
 import com.example.unsplash.data.entities.UImages
 import androidx.paging.PagingSource
 import androidx.paging.PagingState

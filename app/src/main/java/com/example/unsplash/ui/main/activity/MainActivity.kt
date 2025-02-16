@@ -24,7 +24,7 @@ import com.example.unsplash.sys.util.Constants.Companion.SLUG
 import com.example.unsplash.sys.util.Constants.Companion.UPDATED_AT
 import com.example.unsplash.sys.util.Constants.Companion.WIDTH
 import com.example.unsplash.ui.deatils.DetailItemActivity
-import com.example.unsplash.ui.main.ImagesViewModel
+import com.example.unsplash.ui.main.viewmodel.ImagesViewModel
 import com.example.unsplash.ui.main.adapter.UImageAdapter
 import com.example.unsplash.ui.main.fragment.ImageDialogFragment
 import com.example.unsplash.ui.main.interfaces.IAUImage

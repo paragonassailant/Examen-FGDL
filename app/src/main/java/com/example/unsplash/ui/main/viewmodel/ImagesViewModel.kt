@@ -1,4 +1,4 @@
-package com.example.unsplash.ui.main
+package com.example.unsplash.ui.main.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer

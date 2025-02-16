@@ -12,7 +12,7 @@ import com.example.unsplash.data.datasource.web.webds.ImageWebDS
 import com.example.unsplash.data.entities.UImages
 import com.example.unsplash.sys.util.Constants.Companion.RETROFIT_FAILURE
 import com.example.unsplash.sys.util.ErrorObserver
-import com.example.unsplash.ui.main.pagination.PagingSource
+import com.example.unsplash.data.datasource.pagination.PagingSource
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
